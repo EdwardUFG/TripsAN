@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Viaje</title>
+</head>
+<body>
+    <h1>Detalle del Trip</h1>
+    
+    <h3 th:text="'Nombre: ' + ${trip.nombre}"></h3>
+    <h3 th:text="'Descripción: ' + ${trip.descripcion}"></h3>
+    <h3 th:text="'Costo: $' + ${trip.costo}"></h3>
+
+</body>
+</html>
