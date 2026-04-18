@@ -3,6 +3,8 @@ package com.trips.controllers;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Date; // <-- Nuevo importe para la fecha (Diapositiva 19)
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +32,11 @@ public class HomeControllers {
 		return "listado";
 	}
 
-	// -------------------------------------------------------------
-	// LO NUEVO DE LAS DIAPOSITIVAS
-	// -------------------------------------------------------------
-
-	// DIAPOSITIVA 19: Mostrar Detalle de un objeto
 	@GetMapping("/detalle")
 	public String mostrarDetalle(Model model) {
 		Trip trip = new Trip();
-		trip.setNombre("Rapel en Volcatenango"); // Usamos setNombre como lo dejamos en tu modelo
-		trip.setDescripcion("Aventura extrema en las montañas"); // Usamos la palabra corregida
+		trip.setNombre("Rapel en Volcatenango"); 
+		trip.setDescripcion("Aventura extrema en las montañas");
 		trip.setFecha(new Date());
 		trip.setCosto(25.50);
 		
@@ -47,30 +44,37 @@ public class HomeControllers {
 		return "detalle";
 	}
 
-	// DIAPOSITIVA 21 Y 24: Generar lista de objetos con propiedad destacado
 	private List<Trip> getTrips() {
 		List<Trip> lista = new LinkedList<>();
-		
-		Trip t1 = new Trip();
-		t1.setId(1);
-		t1.setNombre("Rapel");
-		t1.setDescripcion("Aventura extrema");
-		t1.setCosto(25.50);
-		t1.setDestacado(1); // Requerimiento Diapositiva 24: 1 para SÍ destacado
-		
-		Trip t2 = new Trip();
-		t2.setId(2);
-		t2.setNombre("Caminata");
-		t2.setDescripcion("Clima frio");
-		t2.setCosto(15.00);
-		t2.setDestacado(0); // Requerimiento Diapositiva 24: 0 para NO destacado
-		
-		lista.add(t1);
-		lista.add(t2);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date d1 = sdf.parse("2024-07-15");
+			Date d2 = sdf.parse("2024-08-20");
+
+			Trip t1 = new Trip();
+			t1.setId(1);
+			t1.setNombre("Rapel");
+			t1.setDescripcion("Aventura extrema");
+			t1.setFecha(d1);
+			t1.setCosto(25.50);
+			t1.setDestacado(1);
+
+			Trip t2 = new Trip();
+			t2.setId(2);
+			t2.setNombre("Caminata");
+			t2.setDescripcion("Clima frio");
+			t2.setFecha(d2);
+			t2.setCosto(15.00);
+			t2.setDestacado(0);
+
+			lista.add(t1);
+			lista.add(t2);
+		} catch (ParseException e) {
+			System.out.println("Error al parsear la fecha: " + e.getMessage());
+		}
 		return lista;
 	}
 
-	// DIAPOSITIVA 21: Enviar la lista a la vista de la tabla
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
 		List<Trip> lista = getTrips();

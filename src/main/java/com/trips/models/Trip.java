@@ -5,8 +5,8 @@ import java.util.Date;
 public class Trip {
 	
 	private Integer id;
-	private String nombre; // <-- Cambiado de nomTrip a nombre
-	private String descripcion; // <-- Corregido el dedazo
+	private String nombre; 
+	private String descripcion; 
 	private double costo;
 	private int calificacion;
 	private String imagen;
@@ -15,8 +15,8 @@ public class Trip {
 	private Date fecha;
 	private Integer idCategoria;
 	
-	// Requerimiento de Diapositiva 24:
-	private Integer destacado; // 1 para sí, 0 para no
+	
+	private Integer destacado;
 	
 	
 	public Integer getId() {
@@ -25,16 +25,16 @@ public class Trip {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getNombre() { // <-- Actualizado
+	public String getNombre() { 
 		return nombre;
 	}
-	public void setNombre(String nombre) { // <-- Actualizado
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripcion() { // <-- Actualizado
+	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String descripcion) { // <-- Actualizado
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	public double getCosto() {
@@ -80,7 +80,6 @@ public class Trip {
 		this.idCategoria = idCategoria;
 	}
 	
-	// Getters y Setters de la propiedad Destacado (Diapositiva 24)
 	public Integer getDestacado() {
 		return destacado;
 	}

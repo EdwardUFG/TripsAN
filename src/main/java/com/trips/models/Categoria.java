@@ -4,7 +4,7 @@ public class Categoria {
 	
 	private Integer id;
 	private String nomCategoria;
-	private String descripcion; // <-- Corregido aquí
+	private String descripcion;
 	private boolean activo;
 	
 	
@@ -20,10 +20,10 @@ public class Categoria {
 	public void setNomCategoria(String nomCategoria) {
 		this.nomCategoria = nomCategoria;
 	}
-	public String getDescripcion() { // <-- Corregido aquí
+	public String getDescripcion() { 
 		return descripcion;
 	}
-	public void setDescripcion(String descripcion) { // <-- Corregido aquí
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	public boolean isActivo() {
