@@ -58,6 +58,7 @@ public class HomeControllers {
 			t1.setFecha(d1);
 			t1.setCosto(25.50);
 			t1.setDestacado(1);
+			t1.setImagen("rapel.jpg");
 
 			Trip t2 = new Trip();
 			t2.setId(2);
@@ -66,6 +67,7 @@ public class HomeControllers {
 			t2.setFecha(d2);
 			t2.setCosto(15.00);
 			t2.setDestacado(0);
+			t2.setImagen("caminata.jpg");
 
 			lista.add(t1);
 			lista.add(t2);
