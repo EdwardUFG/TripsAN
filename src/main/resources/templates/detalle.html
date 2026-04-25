@@ -7,8 +7,26 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h1>Detalle de Categoría</h1>
-    <p>El ID recibido es: <span th:text="${idCategoria}"></span></p>
+    <h1 th:if="${trip != null}">Detalle del Trip</h1>
+    <div th:if="${trip != null}" class="row">
+        <div class="col-md-4" th:if="${trip.imagen != null}">
+            <img th:src="@{/images/{img}(img=${trip.imagen})}" alt="foto" class="img-fluid">
+        </div>
+        <div class="col-md-4" th:unless="${trip.imagen != null}">
+            <div class="border p-3 text-center">No hay imagen</div>
+        </div>
+        <div class="col-md-8">
+            <h2 th:text="${trip.nombre}"></h2>
+            <p><strong>Descripción:</strong> <span th:text="${trip.descripcion}"></span></p>
+            <p><strong>Fecha:</strong> <span th:text="${trip.fecha != null ? #dates.format(trip.fecha, 'dd/MM/yyyy') : '-'}"></span></p>
+            <p><strong>Costo:</strong> $<span th:text="${trip.costo}"></span></p>
+            <p><strong>Destacado:</strong> <span th:text="${trip.destacado == 1 ? 'SÍ' : 'NO'}"></span></p>
+        </div>
+    </div>
+    <div th:unless="${trip != null}">
+        <h1>Detalle</h1>
+        <p>No hay detalles disponibles.</p>
+    </div>
 </div>
 </body>
 </html>

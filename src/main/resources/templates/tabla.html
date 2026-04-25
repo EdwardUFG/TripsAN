@@ -18,11 +18,14 @@
         <thead class="table-dark">
             <tr>
                 <th>Foto</th>
+                <th>Fecha publicación</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Costo</th>
                 <th>Destacado</th>
+                <th>Detalle</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +36,7 @@
                          alt="foto trip" 
                          style="width:120px; height:auto;">
                 </td>
+                <td th:text="${t.fecha != null ? #dates.format(t.fecha, 'dd/MM/yyyy') : '-'}"></td>
                 <td th:text="${t.id}"></td>
                 <td th:text="${t.nombre}"></td>
                 <td th:text="${t.descripcion}"></td>
@@ -40,6 +44,12 @@
                 <td>
                     <span th:if="${t.destacado == 1}" class="badge bg-success">SÍ</span>
                     <span th:unless="${t.destacado == 1}" class="badge bg-danger">NO</span>
+                </td>
+                <td>
+                    <a th:href="@{/detalle(id=${t.id})}" class="btn btn-sm btn-info">Detalle</a>
+                </td>
+                <td>
+                    <a th:href="@{/tabla}" class="btn btn-sm btn-danger">Eliminar</a>
                 </td>
             </tr>
         </tbody>

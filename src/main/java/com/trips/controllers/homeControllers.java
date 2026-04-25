@@ -2,20 +2,26 @@ package com.trips.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Date; // <-- Nuevo importe para la fecha (Diapositiva 19)
+import java.util.Date; 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.trips.models.Trip; // <-- Nuevo importe para usar tu modelo (Diapositiva 19)
+import com.trips.models.Trip;
+import com.trips.services.ITripServices;
 
 @Controller
 public class HomeControllers {
 
-	@GetMapping("/")
+	@Autowired
+	private ITripServices tripServices;
+	
+	
+	@GetMapping({"/", "/home"})
 	public String mostrarHome(Model model) {
 		model.addAttribute("mensaje", "Hola mundo");
 		return "home";
@@ -44,44 +50,23 @@ public class HomeControllers {
 		return "detalle";
 	}
 
-	private List<Trip> getTrips() {
-		List<Trip> lista = new LinkedList<>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			Date d1 = sdf.parse("2024-07-15");
-			Date d2 = sdf.parse("2024-08-20");
 
-			Trip t1 = new Trip();
-			t1.setId(1);
-			t1.setNombre("Rapel");
-			t1.setDescripcion("Aventura extrema");
-			t1.setFecha(d1);
-			t1.setCosto(25.50);
-			t1.setDestacado(1);
-			t1.setImagen("rapel.jpg");
-
-			Trip t2 = new Trip();
-			t2.setId(2);
-			t2.setNombre("Caminata");
-			t2.setDescripcion("Clima frio");
-			t2.setFecha(d2);
-			t2.setCosto(15.00);
-			t2.setDestacado(0);
-			t2.setImagen("caminata.jpg");
-
-			lista.add(t1);
-			lista.add(t2);
-		} catch (ParseException e) {
-			System.out.println("Error al parsear la fecha: " + e.getMessage());
-		}
-		return lista;
-	}
 
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
-		List<Trip> lista = getTrips();
+		
+		List<Trip> lista = tripServices.buscarTodo();
+		
+		for (Trip t : lista) {
+			System.out.println("Trip: " + t.getNombre() + " - fecha=" + t.getFecha());
+		}
 		model.addAttribute("trips", lista);
+		
 		return "tabla";
+		
 	}
+	
+	
+	
 
 }
