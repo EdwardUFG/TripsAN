@@ -12,18 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.trips.models.Trip;
-import com.trips.services.ITripServices;
+import com.trips.services.ITripService;
 
 @Controller
 public class HomeControllers {
 
 	@Autowired
-	private ITripServices tripServices;
+	private ITripService tripServices;
 	
 	
 	@GetMapping({"/", "/home"})
 	public String mostrarHome(Model model) {
 		model.addAttribute("mensaje", "Hola mundo");
+		model.addAttribute("trips", tripServices.buscarTodos());
 		return "home";
 	}
 
@@ -55,7 +56,7 @@ public class HomeControllers {
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {
 		
-		List<Trip> lista = tripServices.buscarTodo();
+		List<Trip> lista = tripServices.buscarTodos();
 		
 		for (Trip t : lista) {
 			System.out.println("Trip: " + t.getNombre() + " - fecha=" + t.getFecha());
