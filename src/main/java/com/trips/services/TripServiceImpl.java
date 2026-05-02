@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.trips.models.Trip;
 
 @Service
-public class TripServiceImpl implements ITripServices  {
+public class TripServiceImpl implements ITripService  {
 	
 	
 	List<Trip> lista = null;
@@ -52,18 +52,18 @@ public class TripServiceImpl implements ITripServices  {
 	}
 	
 	@Override
-	public List<Trip> buscarTodo() {
-		
+	public List<Trip> buscarTodos() {
+        
 		return lista;
 	}
 	@Override
-	public Trip buscarPorId(Integer id) {
+	public Trip buscarPorId(Integer idTrip) {
 		for (Trip t : lista) 
-			if (t.getId()==id) 
+			if (t.getId()==idTrip) 
 				return t;
-			
+            
 			return null;
-	
+    
 	}
 	
 
