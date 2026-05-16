@@ -16,11 +16,10 @@
             <div class="border p-3 text-center">No hay imagen</div>
         </div>
         <div class="col-md-8">
-            <h2 th:text="${trip.nombre}"></h2>
-            <p><strong>Descripción:</strong> <span th:text="${trip.descripcion}"></span></p>
-            <p><strong>Fecha:</strong> <span th:text="${trip.fecha != null ? #dates.format(trip.fecha, 'dd/MM/yyyy') : '-'}"></span></p>
-            <p><strong>Costo:</strong> $<span th:text="${trip.costo}"></span></p>
-            <p><strong>Destacado:</strong> <span th:text="${trip.destacado == 1 ? 'SÍ' : 'NO'}"></span></p>
+            <h4 class="card-header">Trip: <strong th:text="${trip.nombre}"></strong></h4>
+            <p><strong>Fecha:</strong> <span th:text="${trip.fecha}"></span></p>
+            <p><strong>Costo:</strong> <span th:text="${trip.costo}"></span></p>
+            <p class="card-text" th:text="${trip.descripcion}"></p>
         </div>
     </div>
     <div th:unless="${trip != null}">
