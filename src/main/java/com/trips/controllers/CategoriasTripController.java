@@ -1,43 +1,21 @@
 package com.trips.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import com.trips.models.Categoria;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value="/categorias")
 public class CategoriasTripController {
-
-    private List<Categoria> lista = new ArrayList<>();
-
-    @GetMapping("/index")
-    public String mostrarIndex(Model model) {
-        model.addAttribute("categorias", lista);
+    @GetMapping("/create")
+    public String crear() { return "categoriasTrip/formCategoria"; }
+    
+    @PostMapping("/save")
+    public String guardar(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion) {
+        System.out.println("Nombre Categoria: " + nombre);
+        System.out.println("Descripcion: " + descripcion);
         return "categoriasTrip/listCategoria";
     }
-
-    @GetMapping("/create")
-    public String crearCategoria() {
-        return "categoriasTrip/formCategoria";
-    }
-
-    @PostMapping("/save")
-    public String guardarCategoria(@RequestParam("nomCategoria") String nomCategoria,
-                                   @RequestParam("descripcion") String descripcion,
-                                   @RequestParam(value="activo", defaultValue="false") boolean activo) {
-        
-        int nuevoId = lista.size() + 1;
-
-        Categoria nueva = new Categoria(nuevoId, nomCategoria, descripcion, activo);
-        lista.add(nueva);
-
-       
-        return "redirect:/categorias/index";
-    }
-
-    }
+}
